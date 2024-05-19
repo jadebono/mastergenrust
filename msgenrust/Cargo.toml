@@ -5,5 +5,9 @@ edition = "2021"
 
 [dependencies]
 sha2 = "0.10"
+rpassword = "5.0"
+termion = "1.5"
+
+
 
 

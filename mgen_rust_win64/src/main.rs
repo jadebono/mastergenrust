@@ -2,7 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 // Import the necessary modules from external crates
-use eframe::egui; // GUI library for building applications
+use eframe::egui::{self, Response, Ui}; // GUI library for building applications
 use sha2::{Sha256, Digest}; // SHA-256 hashing algorithm
 use clipboard::{ClipboardContext, ClipboardProvider}; // Clipboard handling for copy-paste functionality
 
@@ -84,7 +84,7 @@ impl eframe::App for MyApp {
                 // Create a horizontal layout for the text input field
                 ui.horizontal(|ui| {
                     ui.label("Text:"); // Label for the text input
-                    ui.text_edit_singleline(&mut self.text_input); // Text input field
+                    password_input(ui, &mut self.text_input); // Text input field as password
                 });
 
                 // Add some vertical spacing for better layout
@@ -93,7 +93,7 @@ impl eframe::App for MyApp {
                 // Create a horizontal layout for the depth input field
                 ui.horizontal(|ui| {
                     ui.label("Depth:"); // Label for the depth input
-                    ui.text_edit_singleline(&mut self.depth_input); // Depth input field
+                    password_input(ui, &mut self.depth_input); // Depth input field as password
                 });
 
                 // Add some vertical spacing for better layout
@@ -133,6 +133,18 @@ impl eframe::App for MyApp {
             });
         });
     }
+}
+
+// Function to create a masked input field
+fn password_input(ui: &mut Ui, input: &mut String) -> Response {
+    let mut display_text = "*".repeat(input.len());
+    let response = ui.text_edit_singleline(&mut display_text);
+    if response.changed() {
+        let len = display_text.len();
+        input.clear();
+        input.push_str(&"*".repeat(len));
+    }
+    response
 }
 
 // Main function to set up and run the application

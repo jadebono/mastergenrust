@@ -17,6 +17,12 @@ Code developed on Debian GNU/Linux 12 (bookworm)
 
 ---
 
+## `Language`
+
+Rust
+
+---
+
 ## `Versions`
 
 1. msgenrust (purely cli) - for Linux/Debian distributions;
@@ -28,9 +34,9 @@ No MacOS version has been developed since I don't own Mac hardware .
 
 ## `Code`
 
-Rust versions of the Linux/Debian and Win64 code are provided and may be amended and changed as you please but they'll have to be recompiled. This assumes that you have Rust installed on your OS and you know your way around it.
+Versions of the Linux/Debian and Win64 code are provided and may be amended and changed as you please but they'll have to be recompiled. This assumes that you have Rust installed on your OS and you know your way around it.
 
-If you don't want to compile, the executables are found in a compressed (.zip) file in the root of this depository.
+If you don't want to compile it, the executables are found in a compressed (.zip) file in the root of this depository.
 
 ## `Purpose`
 
@@ -40,7 +46,7 @@ However, passwords managers have a glaring vulnerability - they themselves requi
 
 Solution: Use a sha256 hash function to generate the master password for the password manager. A hash produced by such a function not only has very high entropy, but it is deterministic, meaning that you can generate it at will as long as you have access to the hash function. This will provide you with a password that you will not remember so is impervious to social engineering attacks. However, you will still be able to generate it easily at any time you need it using simple and memorable phrase and depth inputs.
 
-Moreover, msgenrust outputs the generated password to clipboard. So the password is not visible on screen at any time. This defeats both screen recording malware (that take screendumps of your screen) as well as keyloggers (that record every keystroke you make). All you to do to insert your master password is to paste it into your password manager when you log into it.
+Moreover, input masking has been implemented, so inputs are represented by stars on screen, the code outputs the generated password to clipboard. So the password is not visible on screen at any time. This defeats both screen recording malware (that take screendumps of your screen) as well as keyloggers (that record every keystroke you make). All you to do to insert your master password is to paste it into your password manager when you log into it.
 
 ---
 
@@ -75,7 +81,7 @@ Note: mastergen has been tested to a depth of 1e10, taking about 110 seconds to 
 
 ## `Further Notes`
 
-1. Both the phrase and depth fields are inputs of type="password" to hide the inputs from onlookers.
+1. Input masking has been implemented to hide the inputs from onlookers;
 1. Leaving the depth field blank will submit your phrase through the hash function ONCE.
 1. Although you should provide nothing but an integer for depth, input validation has been implemented forthis field with the following results:
    - Leaving the depth field blank => Depth is set to 1 (i.e. the phrase will be hashed ONCE).
