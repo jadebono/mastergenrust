@@ -1,0 +1,13 @@
+[package]
+name = "win64_mastergen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sha2 = "0.10"
+eframe = "0.18"
+clipboard = "0.5.0"
+
+[[bin]]
+name = "win64_mastergen"
+path = "src/main.rs"
